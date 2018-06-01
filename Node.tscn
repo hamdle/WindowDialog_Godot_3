@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Node.gd" type="Script" id=1]
+[ext_resource path="res://start.png" type="Texture" id=2]
+[ext_resource path="res://start-pressed.png" type="Texture" id=3]
+[ext_resource path="res://drupal_styleboxflat.tres" type="StyleBox" id=4]
+[ext_resource path="res://continue.png" type="Texture" id=5]
+[ext_resource path="res://continue-pressed.png" type="Texture" id=6]
+[ext_resource path="res://newgame.png" type="Texture" id=7]
+[ext_resource path="res://newgame-pressed.png" type="Texture" id=8]
 
 [node name="Node" type="Node" index="0"]
 
@@ -20,16 +27,16 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Material", "Rect", "Visibility" ]
 
-[node name="StartButton" type="Button" parent="Container" index="0"]
+[node name="TextureButton" type="TextureButton" parent="Container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 491.0
-margin_top = 290.0
-margin_right = 532.0
-margin_bottom = 310.0
+margin_left = 480.0
+margin_top = 304.0
+margin_right = 576.0
+margin_bottom = 346.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -41,9 +48,10 @@ toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Start"
-flat = false
-align = 1
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+_sections_unfolded = [ "Textures" ]
 
 [node name="WindowDialog" type="WindowDialog" parent="Container" index="1"]
 
@@ -52,49 +60,35 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 453.0
-margin_top = 197.0
-margin_right = 560.0
-margin_bottom = 253.0
+margin_left = 426.0
+margin_top = 262.0
+margin_right = 639.0
+margin_bottom = 424.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_styles/panel = ExtResource( 4 )
 popup_exclusive = false
-window_title = ""
+window_title = "Select"
 resizable = false
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Popup", "Rect", "Size Flags", "Visibility", "custom_styles" ]
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/WindowDialog" index="1"]
+[node name="ContinueButton" type="TextureButton" parent="Container/WindowDialog" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 11.0
-margin_top = 5.0
-margin_right = 93.0
-margin_bottom = 49.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-
-[node name="ContinueButton" type="Button" parent="Container/WindowDialog/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 82.0
-margin_bottom = 20.0
+margin_left = 41.0
+margin_top = 29.0
+margin_right = 180.0
+margin_bottom = 71.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -106,19 +100,21 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Continue"
-flat = false
-align = 1
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+_sections_unfolded = [ "Textures" ]
 
-[node name="NewGameButton" type="Button" parent="Container/WindowDialog/VBoxContainer" index="1"]
+[node name="NewGameButton" type="TextureButton" parent="Container/WindowDialog" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 24.0
-margin_right = 82.0
-margin_bottom = 44.0
+margin_left = 35.0
+margin_top = 90.0
+margin_right = 174.0
+margin_bottom = 132.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -130,16 +126,17 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "New Game"
-flat = false
-align = 1
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+_sections_unfolded = [ "Textures" ]
 
-[connection signal="pressed" from="Container/StartButton" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Container/TextureButton" to="." method="_on_TextureButton_pressed"]
 
 [connection signal="popup_hide" from="Container/WindowDialog" to="." method="_on_WindowDialog_popup_hide"]
 
-[connection signal="pressed" from="Container/WindowDialog/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Container/WindowDialog/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 
-[connection signal="pressed" from="Container/WindowDialog/VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="Container/WindowDialog/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 
 
